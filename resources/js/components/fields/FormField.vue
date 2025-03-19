@@ -7,7 +7,7 @@
                  :has-error="hasError" :first-error="firstError"/>
 
         <div v-if="field.existingMedia">
-          <Button
+          <BasicButton
             class="mt-2"
             icon="arrows-pointing-out"
             :label="openExistingMediaLabel"
