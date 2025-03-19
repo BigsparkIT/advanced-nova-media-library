@@ -20,13 +20,13 @@
             @click.prevent="rotate(-90)"
             variant="action"
             :title="__('Rotate -90')"
-            iconType="arrow-left"
+            iconType="arrow-circle-left"
           />
           <IconButton v-if="!cropAnyway"
             @click.prevent="rotate(+90)"
             variant="action"
             :title="__('Rotate +90')"
-            iconType="arrow-right"
+            iconType="arrow-circle-right"
           />
 
           <DefaultButton
