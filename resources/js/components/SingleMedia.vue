@@ -2,19 +2,19 @@
   <gallery-item class="gallery-item-image" :class="{ 'show-statistics': field.showStatistics }">
     <div class="gallery-item-info p-3">
       <a v-if="downloadUrl" class="icon download" :href="downloadUrl" title="Download">
-        <Icon name="download"/>
+        <Icon type="download"/>
       </a>
       <a v-if="removable" class="icon delete" href="#" @click.prevent="$emit('remove')" title="Remove">
-        <Icon name="trash"/>
+        <Icon type="trash"/>
       </a>
       <a v-if="isCustomPropertiesEditable" class="icon edit" href="#" @click.prevent="$emit('edit-custom-properties')" title="Edit custom properties">
-        <Icon name="pencil"/>
+        <Icon type="pencil"/>
       </a>
       <a class="preview" href="#" @click.prevent="showPreview">
-        <Icon name="magnifying-glass"/>
+        <Icon type="search"/>
       </a>
       <a v-if="croppable" class="icon crop" href="#" @click.prevent="$emit('crop-start', image)">
-        <Icon name="scissors"/>
+        <Icon type="scissors"/>
       </a>
     </div>
     <img :src="src" :alt="image.name" ref="image" class="gallery-image">
@@ -30,13 +30,11 @@
 </template>
 
 <script>
-  import { Icon } from 'laravel-nova-ui'
   import GalleryItem from './GalleryItem';
 
   export default {
     components: {
-      GalleryItem,
-      Icon,
+      GalleryItem
     },
     props: ['image', 'field', 'removable', 'editable', 'isCustomPropertiesEditable'],
     data: () => ({
@@ -170,7 +168,6 @@
 </script>
 
 <style lang="scss">
-  $bg-color: #e8f5fb;
   $item-max-size: 150px;
   $border-radius: 10px;
 
@@ -194,7 +191,7 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
-        background-color: transparentize($bg-color, .2);
+        background-color: rgb(232, 245, 251, 0.2);
         border-radius: $border-radius;
         position: absolute;
         z-index: 10;
@@ -261,7 +258,9 @@
     }
 
     .edit {
-      left: 10px;
+      right: 10px;
+      top: auto;
+      bottom: 10px;
     }
 
     .download {

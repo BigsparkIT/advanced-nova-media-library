@@ -21,50 +21,50 @@
 </template>
 
 <script>
-import GalleryItem from './GalleryItem';
-import {Icon} from "laravel-nova-ui";
+  import { Icon } from 'laravel-nova-ui'
+  import GalleryItem from './GalleryItem';
 
-export default {
-  props: ['image', 'removable', 'isCustomPropertiesEditable'],
-  components: {
-    Icon,
-    GalleryItem,
-  },
-  computed: {
-    downloadUrl() {
-      return this.image.id ? `/nova-vendor/ebess/advanced-nova-media-library/download/${this.image.id}?uuid=${this.image.uuid}` : null;
+  export default {
+    props: ['image', 'removable', 'isCustomPropertiesEditable'],
+    components: {
+      GalleryItem,
+      Icon,
     },
-  }
-};
+    computed: {
+      downloadUrl() {
+        return this.image.id ? `/nova-vendor/ebess/advanced-nova-media-library/download/${this.image.id}?uuid=${this.image.uuid}` : null;
+      },
+    }
+  };
 </script>
 
 <style lang="scss">
-.gallery .edit.edit--file {
-  position: relative;
-  top: auto;
-  right: auto;
-}
+    .gallery .edit.edit--file {
+        position: relative;
+        top: auto;
+        right: auto;
+    }
 
-.gallery-item-file {
-  &.gallery-item {
-    width: 100%;
+  .gallery-item-file {
+    &.gallery-item {
+      width: 100%;
 
-    .gallery-item-info {
-      display: flex;
+      .gallery-item-info {
+        display: flex;
 
-      .label {
-        flex-grow: 1;
-      }
+        .label {
+          flex-grow: 1;
+        }
 
-      .download {
-        color: rgb(var(--colors-primary-500));
-      }
+        .download {
+          color: rgb(var(--colors-primary-500));
+        }
 
-      .delete {
-        align-self: flex-end;
-        color: rgb(var(--colors-red-500));
+        .delete {
+          align-self: flex-end;
+          color: rgb(var(--colors-red-500));
+        }
       }
     }
   }
-}
 </style>

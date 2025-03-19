@@ -19,12 +19,7 @@
 </template>
 
 <script>
-import { Button } from 'laravel-nova-ui';
-
 export default {
-  components: {
-    Button,
-  },
   props: {
     item: {
       default: function () {

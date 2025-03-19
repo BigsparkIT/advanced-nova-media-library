@@ -44,7 +44,6 @@
   import Converter from '../converter';
   import { Cropper } from 'vue-advanced-cropper'
   import 'vue-advanced-cropper/dist/style.css';
-  import { Button} from "laravel-nova-ui";
 
   export default {
     components: {

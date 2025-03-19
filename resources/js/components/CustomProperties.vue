@@ -44,7 +44,7 @@ export default {
       return JSON.parse(JSON.stringify(this.fields)).map(field => tap(field, field => {
         field.value = this.getProperty(field.attribute)
       }))
-    },
+    }
   },
 
   methods: {
