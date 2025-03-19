@@ -68,14 +68,13 @@
 </template>
 
 <script>
-import { Button, Icon } from 'laravel-nova-ui'
+import { Icon } from 'laravel-nova-ui'
 import ExistingMediaItem from './ExistingMediaItem';
 import debounce from 'lodash/debounce';
 
 export default {
   components: {
     ExistingMediaItem,
-    Button,
     Icon,
   },
   data() {
