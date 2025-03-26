@@ -220,19 +220,19 @@ export default {
       };
     },
     retrieveImageFromClipboardAsBlob(pasteEvent, callback) {
-      if (pasteEvent.clipboardData === false) {
+      if (pasteEvent.clipboardData == false) {
         if (typeof (callback) == "function") {
           callback(undefined);
         }
       }
       var items = pasteEvent.clipboardData.items
-      if (items === undefined) {
+      if (items == undefined) {
         if (typeof (callback) == "function") {
           callback(undefined)
         }
       }
       for (var i = 0; i < items.length; i++) {
-        if (-1 === items[i].type.indexOf("image")) continue;
+        if (items[i].type.indexOf("image") == -1) continue;
         var blob = items[i].getAsFile()
 
         if (typeof (callback) == "function") {
