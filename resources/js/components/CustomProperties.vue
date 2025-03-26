@@ -52,6 +52,15 @@ export default {
       this.$emit('close')
     },
     labelFor(field) {
+
+      if (typeof field.value === undefined) {
+        return '';
+      }
+
+      if (field.value == null) {
+        return '';
+      }
+
       //TODO Figure out how to render the field in detail view as it should..
       switch (field.component) {
         case 'select-field':
