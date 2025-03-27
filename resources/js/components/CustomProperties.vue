@@ -53,10 +53,6 @@ export default {
     },
     labelFor(field) {
 
-      if (typeof field.value === undefined) {
-        return '';
-      }
-
       if (field.value == null) {
         return '';
       }
