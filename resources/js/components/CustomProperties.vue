@@ -60,13 +60,7 @@ export default {
       //TODO Figure out how to render the field in detail view as it should..
       switch (field.component) {
         case 'select-field':
-          const selectedValue = field?.options.filter((element) => {
-            if (element.value === field.value) {
-              return element.label;
-            }
-          });
-
-          return selectedValue.length > 0 ? selectedValue[0].label : field.value;
+          return field?.options.find((element) => element.value === field.value)?.label ?? field.value;
         default:
           return field.value;
       }
