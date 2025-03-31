@@ -32,7 +32,7 @@
 
           <!-- Close -->
           <div class="px-4 ml-auto self-center">
-            <Button
+            <BasicButton
               @click.prevent="close"
               variant="link"
               :label="__('Close')"
@@ -54,7 +54,7 @@
 
         <!-- Next page -->
         <div class="flex-shrink border-t dark:border-gray-700 pt-3 mt-4 text-right" v-if="showNextPage">
-          <Button
+          <BasicButton
             @click.prevent="nextPage"
             variant="solid"
             class="ml-auto"
@@ -68,14 +68,13 @@
 </template>
 
 <script>
-import { Button, Icon } from 'laravel-nova-ui'
+import { Icon } from 'laravel-nova-ui'
 import ExistingMediaItem from './ExistingMediaItem';
 import debounce from 'lodash/debounce';
 
 export default {
   components: {
     ExistingMediaItem,
-    Button,
     Icon,
   },
   data() {

@@ -9,40 +9,57 @@
       :configs="field.croppingConfigs"
     />
 
-    <draggable v-if="images.length > 0" v-model="images" class="gallery-list clearfix">
-      <template #item="{element, index}">
-        <div style="float:left; margin-right: 1em;">
-          <component :is="singleComponent" class="mb-3 p-3 mr-3"
-                     :key="index" :image="element" :field="field" :editable="editable" :removable="removable || editable" @remove="remove(index)"
-                     :is-custom-properties-editable="customProperties && customPropertiesFields.length > 0"
-                     @edit-custom-properties="customPropertiesImageIndex = index"
-                     @crop-start="cropImageQueue.push($event)"
-          />
+    <div v-if="images.length > 0">
+      <draggable v-if="editable" v-model="images" class="gallery-list clearfix">
+        <template #item="{element, index}">
+          <div style="float:left; margin-right: 1em;">
+            <component :is="singleComponent" class="mb-3 p-3 mr-3"
+                       :key="index" :image="element" :field="field" :editable="editable" :removable="removable || editable" @remove="remove(index)"
+                       :is-custom-properties-editable="customProperties && customPropertiesFields.length > 0"
+                       @edit-custom-properties="customPropertiesImageIndex = index"
+                       @crop-start="cropImageQueue.push($event)"
+            />
 
+            <CustomProperties
+              :show-modal="customPropertiesImageIndex === index"
+              v-model="images[index]"
+              :fields="customPropertiesFields"
+              @close="customPropertiesImageIndex = null"
+            />
+          </div>
+        </template>
+      </draggable>
+      <div v-else class="gallery-list clearfix">
+        <div style="float:left; margin-right: 1em;" v-for="(element, index) in images">
+          <component
+            :is="singleComponent" class="mb-3 p-3 mr-3"
+            :key="index" :image="element" :field="field" :editable="editable" :removable="removable || editable" @remove="remove(index)"
+            :is-custom-properties-editable="customProperties && customPropertiesFields.length > 0"
+            @edit-custom-properties="customPropertiesImageIndex = index"
+            @crop-start="cropImageQueue.push($event)"
+          />
           <CustomProperties
-            v-if="customPropertiesImageIndex !== null"
-            v-model="images[customPropertiesImageIndex]"
+            :show-modal="customPropertiesImageIndex === index"
+            v-model="images[index]"
             :fields="customPropertiesFields"
             @close="customPropertiesImageIndex = null"
           />
         </div>
-      </template>
-    </draggable>
+      </div>
+    </div>
 
     <span v-else-if="!editable" class="mr-3">&mdash;</span>
-
     <br style="clear: both" />
 
     <span v-if="editable" class="">
       <input :id="`__media__${field.attribute}`" :multiple="multiple" ref="file" class="form-file-input" type="file" :disabled="uploading" @change="add"/>
       <label :for="`__media__${field.attribute}`" class="">
-          <Button
-            variant="solid"
-            @click.prevent="focusFileInput"
-            :icon="uploading ? 'arrows-up-down' : 'plus'"
-            :disabled="uploading"
-            :label="uploading ? __('Uploading') + ' (' + uploadProgress + '%)' : label"
-          />
+          <DefaultButton @click.prevent="focusFileInput"
+                         :disabled="uploading"
+          >
+              {{uploading ? 'uploading...' : label}}
+              <Icon :type="uploading ? 'arrows-up-down' : 'plus'" />
+          </DefaultButton>
       </label>
     </span>
 
@@ -64,7 +81,6 @@ import SingleFile from './SingleFile';
 import Cropper from './Cropper';
 import CustomProperties from './CustomProperties';
 import Draggable from 'vuedraggable';
-import { Button } from 'laravel-nova-ui'
 
 export default {
   components: {
@@ -73,7 +89,6 @@ export default {
     SingleFile,
     CustomProperties,
     Cropper,
-    Button,
   },
   props: {
     hasError: Boolean,

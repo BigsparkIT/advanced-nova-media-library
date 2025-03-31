@@ -2,19 +2,19 @@
   <gallery-item class="gallery-item-file">
     <div class="gallery-item-info">
       <a class="download mr-2" :href="image.__media_urls__.__original__" target="_blank">
-        <Icon name="magnifying-glass"/>
+        <Icon type="search"/>
       </a>
       <a v-if="downloadUrl" class="download mr-2" :href="downloadUrl">
-        <Icon name="arrow-down-tray"/>
+        <Icon type="arrow-down-tray"/>
       </a>
       <span class="label">
         {{ image.file_name }}
       </span>
       <a v-if="isCustomPropertiesEditable" class="edit edit--file ml-2 mr-2" href="#" @click.prevent="$emit('edit-custom-properties')">
-        <Icon name="pencil"/>
+        <Icon type="pencil"/>
       </a>
       <a v-if="removable" class="delete ml-2" href="#" @click.prevent="$emit('remove')">
-        <Icon name="trash"/>
+        <Icon type="trash"/>
       </a>
     </div>
   </gallery-item>

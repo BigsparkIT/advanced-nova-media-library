@@ -10,31 +10,31 @@
           />
         </div>
         <div class="bg-30 px-6 py-3 footer rounded-lg">
-          <Button
+          <LinkButton
             v-if="!cropAnyway"
-            @click.prevent="onCancel"
-            variant="link"
-            :label="__('Cancel')"
-          />
+            @click.prevent="onCancel">
+            {{__('Cancel')}}
+          </LinkButton>
 
-          <Button v-if="!cropAnyway"
+          <IconButton v-if="!cropAnyway"
             @click.prevent="rotate(-90)"
             variant="action"
             :title="__('Rotate -90')"
-            icon="arrow-uturn-left"
+            iconType="arrow-circle-left"
           />
-          <Button v-if="!cropAnyway"
+          <IconButton v-if="!cropAnyway"
             @click.prevent="rotate(+90)"
             variant="action"
             :title="__('Rotate +90')"
-            icon="arrow-uturn-right"
+            iconType="arrow-circle-right"
           />
 
-          <Button
+          <DefaultButton
             @click.prevent="onSave"
             variant="solid"
-            :label="__('Update')"
-          />
+          >
+            {{ __('Update') }}
+          </DefaultButton>
         </div>
       </card>
     </Modal>
@@ -44,12 +44,10 @@
   import Converter from '../converter';
   import { Cropper } from 'vue-advanced-cropper'
   import 'vue-advanced-cropper/dist/style.css';
-  import { Button} from "laravel-nova-ui";
 
   export default {
     components: {
       Cropper,
-      Button,
     },
     props: {
       image: Object,

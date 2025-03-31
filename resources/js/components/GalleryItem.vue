@@ -11,7 +11,6 @@
 </script>
 
 <style lang="scss">
-  $bg-color: #e8f5fb;
   $border-radius: 10px;
 
   .gallery {
@@ -28,11 +27,11 @@
       justify-content: center;
       position: relative;
       border-radius: $border-radius;
-      background-color: $bg-color;
+      background-color: rgb(232, 245, 251, 0.2);
 
       .gallery-item-info {
         display: flex;
-        background-color: transparentize($bg-color, .2);
+        background-color: rgb(232, 245, 251, 0.2);
         border-radius: $border-radius;
         z-index: 10;
       }

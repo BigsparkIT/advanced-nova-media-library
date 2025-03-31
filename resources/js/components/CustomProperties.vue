@@ -1,11 +1,16 @@
 <template>
-  <transition name="fade">
+  <transition name="fade" v-if="showModal">
     <CustomPropertiesModal
       :fields="filledFields"
       @close="handleClose"
       @update="handleUpdate"
     />
   </transition>
+  <div>
+    <div v-for="field in filledFields" :key="field.attribute">
+      {{field.name}}: {{labelFor(field)}}
+    </div>
+  </div>
 </template>
 
 <script>
@@ -13,7 +18,6 @@ import CustomPropertiesModal from './CustomPropertiesModal'
 import tap from 'lodash/tap'
 import get from 'lodash/get'
 import set from 'lodash/set'
-import clone from 'lodash/clone'
 
 export default {
   props: {
@@ -25,16 +29,14 @@ export default {
       type: Array,
       required: true,
     },
+    showModal: {
+      type: Boolean,
+      required: true,
+    }
   },
 
   components: {
     CustomPropertiesModal,
-  },
-
-  data() {
-    return {
-      image: clone(this.modelValue),
-    }
   },
 
   computed: {
@@ -49,25 +51,37 @@ export default {
     handleClose() {
       this.$emit('close')
     },
+    labelFor(field) {
 
+      if (field.value == null) {
+        return '';
+      }
+
+      //TODO Figure out how to render the field in detail view as it should..
+      switch (field.component) {
+        case 'select-field':
+          return field?.options.find((element) => element.value === field.value)?.label ?? field.value;
+        default:
+          return field.value;
+      }
+    },
     handleUpdate(formData) {
       for (let [property, value] of formData.entries()) {
         this.setProperty(property, value)
       }
 
-      this.$emit('update:modelValue', this.image)
+      this.$emit('update:modelValue', this.modelValue)
 
       this.handleClose()
     },
 
     getProperty(property) {
-      return get(this.image, `custom_properties.${property}`)
+      return get(this.modelValue, `custom_properties.${property}`)
     },
 
     setProperty(property, value) {
-      set(this.image, `custom_properties.${property}`, value)
+      set(this.modelValue, `custom_properties.${property}`, value)
     },
   }
 }
 </script>
-
