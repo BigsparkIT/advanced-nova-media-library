@@ -18,7 +18,6 @@ import CustomPropertiesModal from './CustomPropertiesModal'
 import tap from 'lodash/tap'
 import get from 'lodash/get'
 import set from 'lodash/set'
-import clone from 'lodash/clone'
 
 export default {
   props: {
@@ -51,6 +50,20 @@ export default {
   methods: {
     handleClose() {
       this.$emit('close')
+    },
+
+    labelFor(field) {
+      if (field.value == null) {
+        return '';
+      }
+
+      //TODO Figure out how to render the field in detail view as it should..
+      switch (field.component) {
+        case 'select-field':
+          return field?.options.find((element) => element.value === field.value)?.label ?? field.value;
+        default:
+          return field.value;
+      }
     },
 
     handleUpdate(formData) {
