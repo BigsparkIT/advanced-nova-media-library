@@ -12,7 +12,7 @@
     <div v-if="images.length > 0">
       <draggable v-if="editable" v-model="images" class="gallery-list clearfix">
         <template #item="{element, index}">
-          <div style="float:left; margin-right: 1em;">
+          <div style="float:left; margin-right: 1em;display: grid;grid-template-rows: auto auto;">
             <component :is="singleComponent" class="mb-3 p-3 mr-3"
                        :key="index" :image="element" :field="field" :editable="editable" :removable="removable || editable" @remove="remove(index)"
                        :is-custom-properties-editable="customProperties && customPropertiesFields.length > 0"
@@ -30,7 +30,7 @@
         </template>
       </draggable>
       <div v-else class="gallery-list clearfix">
-        <div style="float:left; margin-right: 1em;" v-for="(element, index) in images">
+        <div style="float:left; margin-right: 1em;display: grid;grid-template-rows: auto auto;" v-for="(element, index) in images">
           <component
             :is="singleComponent" class="mb-3 p-3 mr-3"
             :key="index" :image="element" :field="field" :editable="editable" :removable="removable || editable" @remove="remove(index)"
