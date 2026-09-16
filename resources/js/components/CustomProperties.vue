@@ -1,11 +1,16 @@
 <template>
-  <transition name="fade">
+  <transition name="fade" v-if="showModal">
     <CustomPropertiesModal
       :fields="filledFields"
       @close="handleClose"
       @update="handleUpdate"
     />
   </transition>
+  <div>
+    <div v-for="field in filledFields" :key="field.attribute">
+      {{field.name}}: {{labelFor(field)}}
+    </div>
+  </div>
 </template>
 
 <script>
@@ -25,16 +30,14 @@ export default {
       type: Array,
       required: true,
     },
+    showModal: {
+      type: Boolean,
+      required: true,
+    },
   },
 
   components: {
     CustomPropertiesModal,
-  },
-
-  data() {
-    return {
-      image: clone(this.modelValue),
-    }
   },
 
   computed: {
@@ -55,17 +58,17 @@ export default {
         this.setProperty(property, value)
       }
 
-      this.$emit('update:modelValue', this.image)
+      this.$emit('update:modelValue', this.modelValue)
 
       this.handleClose()
     },
 
     getProperty(property) {
-      return get(this.image, `custom_properties.${property}`)
+      return get(this.modelValue, `custom_properties.${property}`)
     },
 
     setProperty(property, value) {
-      set(this.image, `custom_properties.${property}`, value)
+      set(this.modelValue, `custom_properties.${property}`, value)
     },
   }
 }
