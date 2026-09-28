@@ -15,6 +15,7 @@ mix.setPublicPath('dist')
     'laravel-nova': path.join(__dirname, '../../laravel/nova/resources/js/mixins/packages.js'),
     'axios': path.join(__dirname, 'node_modules/axios'),
     'lodash': path.join(__dirname, 'node_modules/lodash'),
+    'uid': path.join(__dirname, 'node_modules/uid'),
     'form-backend-validation': path.join(__dirname, 'node_modules/form-backend-validation'),
     '@babel/plugin-transform-runtime': path.join(__dirname, 'node_modules/@babel/plugin-transform-runtime'),
     '@babel/runtime': path.join(__dirname, 'node_modules/@babel/runtime'),

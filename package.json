@@ -16,6 +16,7 @@
         "resolve-url-loader": "5.0.0",
         "sass": "^1.19.0",
         "sass-loader": "^16.0.5",
+        "uid": "^2.0.2",
         "vue-loader": "^16.2.0",
         "vue-template-compiler": "^2.6.10"
     },
